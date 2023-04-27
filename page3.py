@@ -2,9 +2,6 @@ import streamlit as st
 import pandas as pd
 
 
-plt.style.use("dark_background")
-
-
 def stats_table(df):
     # get user input for how many comparisons to make
     st.markdown("## Summary Statistics")
