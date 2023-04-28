@@ -5,7 +5,7 @@ import calendar
 
 # import data
 # import data and fix it
-def second_page(data: pd.DataFrame):
+def filterer(data: pd.DataFrame):
     # create user input section
     df = data.copy()
     year_, month_, day_, weekday_ = st.columns(4)
@@ -44,7 +44,7 @@ def second_page(data: pd.DataFrame):
             df = df[df["date"].dt.day_name() == weekday_value]
 
     # filter data
-    st.table(df.head(10))
+    return df
 
 
 if __name__ == "__main__":
