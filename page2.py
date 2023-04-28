@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import calendar
 
 
 # import data
@@ -49,4 +48,4 @@ def filterer(data: pd.DataFrame):
 
 if __name__ == "__main__":
     frame = pd.read_excel("/Users/andrejacobs/Desktop/una_data/EAB Gift 23Jan2023 copy.xlsx")
-    second_page(frame)
+    filterer(frame)
