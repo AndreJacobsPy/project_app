@@ -2,6 +2,9 @@ import streamlit as st
 
 
 def comparisons(data):
+    # comparing different datetime sections
+    st.markdown("## Time Comparisons")
+
     # get user input on how to subset data
     method = st.selectbox("Subset method", ["Year", "Month", "Weekday"])
 

@@ -1,10 +1,40 @@
 import streamlit as st
-from page2 import filterer
 
 
 def user_comparisons(data):
-    # first subset
-    first = filterer(data)
+    # create first subset
+    df = data.copy()
+    year_, month_, day_, weekday_ = st.columns(4)
 
-    # second subset
-    second = filterer(data)
+    with year_:
+        year = st.checkbox("Year")
+        year_value = st.number_input("Year",
+                                     min_value=df.index.year.min(), max_value=df.index.year.max()
+                                     )
+
+        if year:
+            df = df.query(f"index.dt.year == {year_value}")
+
+    with month_:
+        month = st.checkbox("Month")
+        month_value = st.number_input("Month", min_value=1, max_value=12)
+
+        if month:
+            df = df.query(f"index.dt.month == {month_value}")
+
+    with day_:
+        day = st.checkbox("Day")
+        day_value = st.number_input("Day", min_value=1, max_value=31)
+
+        if day:
+            df = df.query(f"index.dt.day == {day_value}")
+
+    with weekday_:
+        weekday = st.checkbox("Weekday")
+        weekday_value = st.selectbox("Weekday",
+                                     ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+                                      "Saturday", "Sunday"])
+
+        if weekday:
+            df = df.reset_index()
+            df = df[df["date"].dt.day_name() == weekday_value]
