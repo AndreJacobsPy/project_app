@@ -1,11 +1,13 @@
+import pandas as pd
 import streamlit as st
 from plotly import express as px
 
 
-def graphs(grouped, method):
+def graphs(grouped, method: str):
+    data = pd.DataFrame(grouped).reset_index()
+    data.columns = [method, "Donation Amount"]
     fig = px.bar(
-        grouped.index, grouped, title="Donations by {}".format(method),
-        labels={"Index": method, "x": "donation amount"}
+        data, method, "Donation Amount", title="Donations by {}".format(method)
     )
     return fig
 
