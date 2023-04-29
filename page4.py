@@ -1,4 +1,10 @@
 import streamlit as st
+from plotly import express as px
+
+
+def graphs(grouped) -> None:
+    fig = px.bar(grouped.index, grouped.amount)
+    fig.show()
 
 
 def comparisons(data):
@@ -10,10 +16,13 @@ def comparisons(data):
 
     # group by chosen method
     if method == "Year":
-        st.table(data.groupby(data.index.year).amount.mean())
+        groups = data.groupby(data.index.year).amount.mean()
 
     elif method == "Month":
-        st.table(data.groupby(data.index.month).amount.mean())
+        groups = data.groupby(data.index.month).amount.mean()
 
     else:
-        st.table(data.groupby(data.index.day_name()).amount.mean())
+        groups = data.groupby(data.index.day_name()).amount.mean()
+
+    st.table(groups)
+    graphs(groups)
