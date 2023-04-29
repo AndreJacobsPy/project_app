@@ -3,7 +3,7 @@ from plotly import express as px
 
 
 def graphs(grouped) -> None:
-    fig = px.bar(grouped.index, grouped.amount)
+    fig = px.bar(grouped.index, grouped)
     fig.show()
 
 
