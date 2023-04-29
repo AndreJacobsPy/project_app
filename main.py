@@ -24,7 +24,7 @@ with tab1:
 with tab2:
     if file is not None:
         df = filterer(df)
-        st.table(df)
+        st.table(df.head(10))
 
 # third page
 with tab3:
