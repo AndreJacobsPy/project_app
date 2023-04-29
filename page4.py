@@ -2,9 +2,9 @@ import streamlit as st
 from plotly import express as px
 
 
-def graphs(grouped) -> None:
+def graphs(grouped) -> px.Figure:
     fig = px.bar(grouped.index, grouped)
-    fig.show()
+    return fig
 
 
 def comparisons(data):
@@ -25,4 +25,6 @@ def comparisons(data):
         groups = data.groupby(data.index.day_name()).amount.mean()
 
     st.table(groups)
-    graphs(groups)
+    fig = graphs(groups)
+
+    st.plotly_chart(fig)
