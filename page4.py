@@ -2,8 +2,11 @@ import streamlit as st
 from plotly import express as px
 
 
-def graphs(grouped):
-    fig = px.bar(grouped.index, grouped)
+def graphs(grouped, method):
+    fig = px.bar(
+        grouped.index, grouped, title="Donations by {}".format(method),
+        labels={grouped.index: method, grouped: "donation amount"}
+    )
     return fig
 
 
@@ -25,6 +28,7 @@ def comparisons(data):
         groups = data.groupby(data.index.day_name()).amount.mean()
 
     st.table(groups)
-    fig = graphs(groups)
+    fig = graphs(groups, method)
 
+    st.markdown("## Distribution of Donations")
     st.plotly_chart(fig)
