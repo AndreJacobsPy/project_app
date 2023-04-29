@@ -2,7 +2,7 @@ import streamlit as st
 from plotly import express as px
 
 
-def graphs(grouped) -> px.Figure:
+def graphs(grouped):
     fig = px.bar(grouped.index, grouped)
     return fig
 
