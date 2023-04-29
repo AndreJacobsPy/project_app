@@ -5,7 +5,7 @@ from plotly import express as px
 def graphs(grouped, method):
     fig = px.bar(
         grouped.index, grouped, title="Donations by {}".format(method),
-        labels={grouped.index: method, grouped: "donation amount"}
+        labels={"index": method, "x": "donation amount"}
     )
     return fig
 
