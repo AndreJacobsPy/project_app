@@ -1,6 +1,6 @@
 import streamlit as st
 from page1 import load_data
-from page2 import filterer, download_data
+from page2 import filterer, convert_df
 from page3 import stats_table
 from page4 import comparisons
 
@@ -26,8 +26,15 @@ with tab2:
         df = filterer(df)
         st.table(df.head(10))
 
-        # download data
-        download_data(df)
+        # download file
+        csv = convert_df(df)
+
+        st.download_button(
+            label="Download data as CSV",
+            data=csv,
+            file_name='large_df.csv',
+            mime='text/csv',
+        )
 
 # third page
 with tab3:

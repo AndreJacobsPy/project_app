@@ -46,15 +46,11 @@ def filterer(data: pd.DataFrame):
     return df
 
 
-@st.cache
-def download_data(data: pd.DataFrame) -> None:
-    # convert data into csv
-    csv = data.to_csv('data.csv', index=False)
-
-    # create button
-    st.download_button(
-        "Data Download", csv, 'data.csv'
-    )
+# download data
+@st.cache_data
+def convert_df(df):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return df.to_csv().encode('utf-8')
 
 
 if __name__ == "__main__":
