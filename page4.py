@@ -21,13 +21,13 @@ def comparisons(data):
 
     # group by chosen method
     if method == "Year":
-        groups = data.groupby(data.index.year).amount.mean()
+        groups = data.groupby(data.index.dt.year).amount.mean()
 
     elif method == "Month":
-        groups = data.groupby(data.index.month).amount.mean()
+        groups = data.groupby(data.index.dt.month).amount.mean()
 
     else:
-        groups = data.groupby(data.index.day_name()).amount.mean()
+        groups = data.groupby(data.index.dt.day_name()).amount.mean()
 
     st.table(groups)
     fig = graphs(groups, method)
