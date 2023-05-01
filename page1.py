@@ -11,7 +11,7 @@ def load_data(file, filetype) -> pd.DataFrame:
         if file is not None:
             df = pd.read_excel(file)
 
-    elif filename ==  "csv":
+    elif filetype ==  "csv":
         if file is not None:
             df = pd.read_csv(file)
 

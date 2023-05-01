@@ -46,6 +46,17 @@ def filterer(data: pd.DataFrame):
     return df
 
 
+@st.cache
+def download_data(data: pd.DataFrame) -> None:
+    # convert data into csv
+    csv = data.to_csv('data.csv', index=False)
+
+    # create button
+    st.download_button(
+        "Data Download", csv, 'data.csv'
+    )
+
+
 if __name__ == "__main__":
     frame = pd.read_excel("/Users/andrejacobs/Desktop/una_data/EAB Gift 23Jan2023 copy.xlsx")
     filterer(frame)
