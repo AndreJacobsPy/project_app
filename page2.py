@@ -41,6 +41,7 @@ def filterer(data: pd.DataFrame):
         if weekday:
             df = df.reset_index()
             df = df[df["date"].dt.day_name() == weekday_value]
+            df = df.set_index("date")
 
     # filter data
     return df
