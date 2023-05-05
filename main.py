@@ -6,7 +6,7 @@ from page3 import stats_table
 from page4 import comparisons
 
 
-# app start!
+# app start!!
 st.markdown("# Datetime Fund Analysis")
 
 # adding tabs for different pages
