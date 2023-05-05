@@ -17,9 +17,9 @@ def stats_table(df: pd.DataFrame):
         "Number of Donations": [number_donations], "Smallest Donation": [small], "Largest Donation": [big]
     }
     stats_df = pd.DataFrame(stats)
-    return stats_df.style.format({
+    return pd.DataFrame(stats_df.style.format({
         "Mean": "{:.2f}", "Standard Deviation": "{:.2f}",
         "Smallest Donation": "{:.2f}", "Largest Donation": "{:.2f}"
-    })
+    }))
 
 
