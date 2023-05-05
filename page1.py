@@ -4,7 +4,7 @@ from data_processing import simplify
 
 
 # function for the first page of app
-@st.cache_data()
+@st.cache_data
 def load_data(file, filetype) -> pd.DataFrame:
     # checking for common file types
     if filetype == "xlsx":

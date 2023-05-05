@@ -50,30 +50,33 @@ with tab4:
 
 # fifth page
 with tab5:
-    # page title
-    st.markdown("## Summary Statistics")
+    if file is not None:    
+        # page title
+        st.markdown("## Summary Statistics")
 
-    # a function to help create multiple subsets
-    def task(df: pd.DataFrame):
-        # display data
-        df = df.query(f"index.dt.year == {year} & index.dt.month == {month}")
-        return df
+        # a function to help create multiple subsets
+        def task(df: pd.DataFrame):
+            # display data
+            df = df.query(f"'{start}' <= index <= '{end}'").sort_index()
+            return df
 
-    # getting user input for how many subsets to do
-    subsets = st.number_input("Subsets", step=1)
-    years_: pd.DatetimeIndex = df.index.year
-
-    for i in range(subsets):
-        # change name
-        name_m: str = f"month{i+1}"
-        name_y: str = f"year{i+1}"
-
-        # create widgets
-        year: int = st.number_input(name_y, min_value=years_.min(), max_value=years_.max())
-        month: int = st.number_input(name_m, min_value=1, max_value=12)
-
-        # save data
-        st.table(stats_table(task(df)))
+        # getting user input for how many subsets to do
+        subsets = st.number_input("Subsets", step=1)
         
+        for i in range(subsets):
+        
+            # making page pretty    
+            col1, col2 = st.columns(2)
 
+            # have to update widget name
+            s_name = f"Start.{i+1}"
+            e_name = f"End.{i+1}"
 
+            # putting start and end date next to each other
+            with col1:    
+                start = st.date_input(s_name, value=df.index.max(), min_value=df.index.min(), max_value=df.index.max())
+            
+            with col2:
+                end = st.date_input(e_name, value=df.index.max(), min_value=df.index.min(), max_value=df.index.max())
+
+            st.table(stats_table(task(df)))
